@@ -1,19 +1,24 @@
 <?php
+$action = strtolower(filter_input(INPUT_POST, "action", FILTER_SANITIZE_STRING));
 
-$filPost = filter_input_array(INPUT_POST, [
-	'name' => FILTER_SANITIZE_STRING,
-	'desc' => FILTER_SANITIZE_STRING,
-	'type' => FILTER_SANITIZE_STRING,
+if(isset($action) && $action == "submit"){
+	$filPost = filter_input_array(INPUT_POST, [
+		'name' => FILTER_SANITIZE_STRING,
+		'desc' => FILTER_SANITIZE_STRING,
+		'type' => FILTER_SANITIZE_STRING,
 
-	'lines' => [
-		'filter' => FILTER_SANITIZE_STRING,
-		'flags'  => FILTER_REQUIRE_ARRAY
-	]
-]);
+		'lines' => [
+			'filter' => FILTER_SANITIZE_STRING,
+			'flags'  => FILTER_REQUIRE_ARRAY
+		]
+	]);
 
-$id = (count(scandir("./exercises")) - 2);
+	$id = (count(scandir("./exercises")) - 2);
 
-file_put_contents("./exercises/" . $id  . ".json", json_encode($filPost))
+	file_put_contents("./exercises/" . $id  . ".json", json_encode($filPost));
+
+	header("Location: ../");
+}
 
 ?>
 
@@ -47,7 +52,7 @@ file_put_contents("./exercises/" . $id  . ".json", json_encode($filPost))
 				<input class="answ" name="lines[0][answer]" placeholder="vastus" type="" required>
 			</div>
 		</div>
-		<button>Submit</button>
+		<button name="action" value="submit">Submit</button>
 		<button type="button" onclick="addQuestion()">Add question</button>
 	</form>
 
