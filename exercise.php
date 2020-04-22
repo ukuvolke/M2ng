@@ -62,7 +62,12 @@
 		typField.disabled = false;
 		typField.focus()
 
-		typField.addEventListener("keypress", e => {
+		typField.addEventListener("keydown", e => {
+			if(data.type == "hotkeys" && e.keyCode != 13){
+				e.preventDefault()
+				e.target.value = (e.ctrlKey  ? "Ctrl + ": "" ) + (e.shiftKey ? "Shift + ": "" ) + (e.altKey ? "Alt + ": "" ) + e.key.toLowerCase()
+			}
+
 			if(e.keyCode == 13){
 				var res = typField.value;
 
