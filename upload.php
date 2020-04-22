@@ -80,7 +80,6 @@ file_put_contents("./exercises/" . $id  . ".json", json_encode($filPost))
 
 					e.target.value = (e.ctrlKey  ? "Ctrl + ": "" ) + (e.shiftKey ? "Shift + ": "" ) + (e.altKey ? "Alt + ": "" ) + e.key.toLowerCase()
 					return false;
-				}else{
 				}
 			})
 		})
