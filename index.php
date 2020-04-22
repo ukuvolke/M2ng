@@ -50,6 +50,7 @@
 			margin: 10px;
 
 			border-radius: 10px;
+			box-shadow: 10px 5px 5px #aaa;
 		}
 
 		.exercises .name {
