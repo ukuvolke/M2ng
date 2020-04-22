@@ -16,6 +16,11 @@
 			padding: 0;
 		}
 
+		body{
+			background-image: url("./backgroung.svg");
+			background-size: cover;
+		}
+
 		nav{
 			margin: 0 10px;
 			padding: 10px 4px;
@@ -43,6 +48,8 @@
 			text-decoration: none;
 			text-align: center;
 			margin: 10px;
+
+			border-radius: 10px;
 		}
 
 		.exercises .name {
