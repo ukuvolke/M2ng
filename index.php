@@ -75,7 +75,7 @@
 				<?php
 				$filecontent = json_decode(file_get_contents("./exercises/" . $file));
 				if($filecontent){ ?>
-					<a class="<?= $filecontent->type?>" href="<?= explode(".", $file)[0] ?>">
+					<a class="<?= $filecontent->type?>" href="exercise.php?id=<?= explode(".", $file)[0] ?>">
 						<h1 class="name"><?= $filecontent->name ?></h1>
 						<span class="desc"><?= $filecontent->desc ?></span>
 					</a>
