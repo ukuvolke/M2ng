@@ -1,0 +1,27 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.input{
+	display: grid;
+	max-width: 600px;
+	flex-grow: 1;
+}
+
+#next {
+	margin: auto;
+	font-size: 2rem;
+}
+
+#prevVal {
+	height: 400px;
+	overflow-y: auto;
+}

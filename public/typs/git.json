@@ -1,0 +1,41 @@
+[
+	{
+		"start tracking file": "git add"
+	},
+	{
+		"stage a file": "git add"
+	},
+	{
+		"stage all files": "git add ."
+	},
+
+	{
+		"stop tracking a file": "git rm"
+	},
+
+	{
+		"see current status": "git status"
+	},
+
+	{
+		"save the current changes and open the editior for the message": "git commit"
+	},
+	{
+		"save the current changes and provide a message": "git commit -m"
+	},
+
+	{
+		"make the remote equal to your state": "git push"
+	},
+	{
+		"get the latest updates from remote": "git pull"
+	},
+
+	{
+		"show the diffrence between commits": "git diff"
+	},
+
+	{
+		"how previous commits": "git log"
+	}
+]

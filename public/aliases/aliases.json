@@ -1,0 +1,11 @@
+{
+	"ga": "git add",
+	"g": "git",
+	"gst": "git status",
+	"gc": "git commit",
+	"gcmsg": "git commit -m",
+	"gco": "git checkout",
+	"gp": "git push",
+	"gd": "git diff",
+	"gl": "git pull"
+}
