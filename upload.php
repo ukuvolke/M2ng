@@ -3,6 +3,7 @@
 $filPost = filter_input_array(INPUT_POST, [
 	'name' => FILTER_SANITIZE_STRING,
 	'desc' => FILTER_SANITIZE_STRING,
+	'type' => FILTER_SANITIZE_STRING,
 
 	'lines' => [
 		'filter' => FILTER_SANITIZE_STRING,
@@ -31,12 +32,12 @@ file_put_contents("./exercises/" . $id  . ".json", json_encode($filPost))
 		<br>
 
 		<label for="normal">Küsimused</label>
-		<input id="normal" name="type" value="küsimused" type="radio" checked required>
+		<input id="normal" name="type" value="normal" type="radio" checked required>
 
 		<br>
 
 		<label for="hotkeys">Kiirklahvid</label>
-		<input id="hotkeys" name="type" value="kiirklahvid" type="radio" required>
+		<input id="hotkeys" name="type" value="hotkeys" type="radio" required>
 
 		<br>
 
@@ -74,10 +75,8 @@ file_put_contents("./exercises/" . $id  . ".json", json_encode($filPost))
 
 		Array.from(questionElms).forEach(i => {
 			i.addEventListener("keydown", e => {
-				console.log(e)
 				if(writeType == "hotkeys"){
 					e.preventDefault()
-
 					e.target.value = (e.ctrlKey  ? "Ctrl + ": "" ) + (e.shiftKey ? "Shift + ": "" ) + (e.altKey ? "Alt + ": "" ) + e.key.toLowerCase()
 					return false;
 				}
