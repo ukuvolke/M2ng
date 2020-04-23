@@ -49,7 +49,7 @@
 	const prevVal = document.querySelector("#prevVal")
 	const next = document.querySelector("#next")
 
-	advFetch("./exercises/<?= (int) $_GET['id']?>.json").then(data => {
+	advFetch("./exercises/<?= filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT) ?>.json").then(data => {
 		let typs = [];
 
 		shuffle(data.lines).forEach(typ => {
@@ -65,6 +65,7 @@
 		typField.addEventListener("keydown", e => {
 			if(data.type == "hotkeys" && e.keyCode != 13){
 				e.preventDefault()
+
 				e.target.value = (e.ctrlKey  ? "Ctrl + ": "" ) + (e.shiftKey ? "Shift + ": "" ) + (e.altKey ? "Alt + ": "" ) + e.key.toLowerCase()
 			}
 
