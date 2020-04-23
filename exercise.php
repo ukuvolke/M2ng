@@ -13,6 +13,9 @@
 		<div id="prevVal"></div>
 	</div>
 
+	<p id="res"><span id="min">0</span> : <span id="sec">00</span> : <span id="msec">000</span></p>
+
+<script src="stopper.js"></script>
 <script>
 	async function advFetch(url = '') {
 		const response = await fetch(url, {
@@ -91,6 +94,10 @@
 		typField.focus()
 
 		typField.addEventListener("keydown", e => {
+			if(!timer){
+				startWatch()
+			}
+
 			if(data.type == "hotkeys" && e.keyCode != 13){
 				e.preventDefault()
 
@@ -108,7 +115,7 @@
 						if(typs[now]){
 							next.innerText = typs[now].val;
 						}else{
-							alert("Done!")
+							stopWatch()
 						}
 					}else{
 						alert("FAIL")
