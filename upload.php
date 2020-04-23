@@ -72,10 +72,11 @@ if(isset($action) && $action == "submit"){
 			clone.id = ""
 			Array.from(clone.children).forEach((i, index) => {
 				i.name = "lines[" + counter + "][" + i.name.split("[")[2]
+				i.value = "";
 			})
 
 
-			clone.addEventListener("keydown", e => {
+			clone.children[1].addEventListener("keydown", e => {
 				if(writeType == "hotkeys"){
 					e.preventDefault()
 					e.target.value = (e.ctrlKey  ? "Ctrl + ": "" ) + (e.shiftKey ? "Shift + ": "" ) + (e.altKey ? "Alt + ": "" ) + e.key.toLowerCase()
