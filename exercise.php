@@ -4,6 +4,23 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<style>
+		.leaderboardModal{
+			width: 100vw;
+			height: 100vh;
+
+			top: 0;
+			left: 0;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			position: absolute;
+
+			background-color: #aaaa
+		}
+	</style>
 </head>
 <body>
 
@@ -13,20 +30,46 @@
 		<div id="prevVal"></div>
 	</div>
 
-	<p id="res"><span id="min">0</span> : <span id="sec">00</span> : <span id="msec">000</span></p>
+	<p id="res"><span id="min">0</span> : <span id="sec">00</span> : <span id="msec">000</span> +<span id="pen">0</span></p>
+
+	<div class="leaderboardModal" style="display: none;">
+		<form id="leaderboardForm"  action="">
+			<input id="name" placeholder="nimi" type="">
+			<button type="submit">Lisa Edetabelisse</button>
+		</form>
+	</div>
+
 
 <script src="stopper.js"></script>
 <script>
-	async function advFetch(url = '') {
-		const response = await fetch(url, {
-			method: 'GET',
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'same-origin',
-			redirect: 'follow',
-			referrerPolicy: 'no-referrer',
-		});
-		return await response.json();
+	async function advFetch(url = '', met = 'GET', data = {}) {
+		if(met == 'GET'){
+			const response = await fetch(url, {
+				method: 'GET',
+				mode: 'cors',
+				cache: 'no-cache',
+				credentials: 'same-origin',
+				redirect: 'follow',
+				referrerPolicy: 'no-referrer',
+			});
+			return await response.json();
+		} else if(met == 'POST'){
+			const response = await fetch(url, {
+				method: 'POST',
+				mode: 'cors',
+				cache: 'no-cache',
+				credentials: 'same-origin',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				redirect: 'follow',
+				referrerPolicy: 'no-referrer',
+				body: JSON.stringify(data)
+			});
+			return await response.json();
+		} else {
+			console.error("method MUST be POST or GET")
+		}
 	}
 
 	function shuffle(array) {
@@ -80,7 +123,11 @@
 	const prevVal = document.querySelector("#prevVal")
 	const next = document.querySelector("#next")
 
-	advFetch("./exercises/<?= filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT) ?>.json").then(data => {
+	let mistakes = 0;
+
+	const id = <?= filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT) ?>
+
+	advFetch("./exercises/" + id + ".json").then(data => {
 		let typs = [];
 
 		shuffle(data.lines).forEach(typ => {
@@ -115,16 +162,34 @@
 						if(typs[now]){
 							next.innerText = typs[now].val;
 						}else{
+							curTime = min + ":" + sec + ":" + msec
+
+							min_txt.innerText = min
+							sec_txt.innerText = sec
+							msec_txt.innerText = msec
+
+							leaderboardForm.parentElement.style.display = ""
+
+
 							stopWatch()
 						}
 					}else{
-						alert("FAIL")
+						mistakes++;
+						document.getElementById("pen").innerText++
 					}
 				}
 				typField.value = "";
 			}
 		})
 	})
+
+	let leaderboardForm = document.getElementById("leaderboardForm")
+	leaderboardForm.addEventListener("submit", e => {
+		e.preventDefault()
+		let name = document.getElementById("name").value
+		advFetch("leaderboard.php", "POST", [id, name, curTime, mistakes])
+	})
+
 </script>
 
 </body>
