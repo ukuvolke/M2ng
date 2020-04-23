@@ -188,6 +188,7 @@
 		e.preventDefault()
 		let name = document.getElementById("name").value
 		advFetch("leaderboard.php", "POST", [id, name, curTime, mistakes])
+		leaderboardForm.parentElement.style.display = "none"
 	})
 
 </script>
