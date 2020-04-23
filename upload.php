@@ -74,6 +74,15 @@ if(isset($action) && $action == "submit"){
 				i.name = "lines[" + counter + "][" + i.name.split("[")[2]
 			})
 
+
+			clone.addEventListener("keydown", e => {
+				if(writeType == "hotkeys"){
+					e.preventDefault()
+					e.target.value = (e.ctrlKey  ? "Ctrl + ": "" ) + (e.shiftKey ? "Shift + ": "" ) + (e.altKey ? "Alt + ": "" ) + e.key.toLowerCase()
+					return false;
+				}
+			})
+
 			questions.appendChild(clone)
 			counter++;
 		}
